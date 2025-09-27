@@ -178,15 +178,17 @@ const Landing = () => {
           </section>)}
 
         {/* Features Section */}
-        <section className="container mx-auto px-6 py-20">
+        <section className="container mx-auto px-6 py-12">
           <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-12 text-center">
+            <div className="grid md:grid-cols-3 gap-8 text-center">
               <div className="animate-slide-up">
-                <div className="w-16 h-16 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6">
-                  <div className="w-8 h-8 bg-sage rounded-full"></div>
+                <div className="relative w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+                  <div className="absolute inset-0 bg-sage-light rounded-full animate-ping opacity-20"></div>
+                  <div className="absolute inset-2 bg-sage-light rounded-full animate-ping opacity-40" style={{ animationDelay: "0.5s" }}></div>
+                  <div className="relative w-10 h-10 bg-sage rounded-full"></div>
                 </div>
-                <h3 className="text-xl font-medium mb-4">Gentle Guidance</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-2xl font-medium mb-4">Gentle Guidance</h3>
+                <p className="text-lg text-muted-foreground">
                   Your avatar asks thoughtful questions to help you discover your own answers.
                 </p>
               </div>
@@ -194,11 +196,13 @@ const Landing = () => {
               <div className="animate-slide-up" style={{
               animationDelay: "0.2s"
             }}>
-                <div className="w-16 h-16 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6">
-                  <div className="w-8 h-8 bg-sage rounded-full"></div>
+                <div className="relative w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+                  <div className="absolute inset-0 bg-sage-light rounded-full animate-ping opacity-20"></div>
+                  <div className="absolute inset-2 bg-sage-light rounded-full animate-ping opacity-40" style={{ animationDelay: "0.5s" }}></div>
+                  <div className="relative w-10 h-10 bg-sage rounded-full"></div>
                 </div>
-                <h3 className="text-xl font-medium mb-4">Safe Space</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-2xl font-medium mb-4">Safe Space</h3>
+                <p className="text-lg text-muted-foreground">
                   A private, judgment-free environment for honest self-reflection.
                 </p>
               </div>
@@ -206,11 +210,13 @@ const Landing = () => {
               <div className="animate-slide-up" style={{
               animationDelay: "0.4s"
             }}>
-                <div className="w-16 h-16 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6">
-                  <div className="w-8 h-8 bg-sage rounded-full"></div>
+                <div className="relative w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+                  <div className="absolute inset-0 bg-sage-light rounded-full animate-ping opacity-20"></div>
+                  <div className="absolute inset-2 bg-sage-light rounded-full animate-ping opacity-40" style={{ animationDelay: "0.5s" }}></div>
+                  <div className="relative w-10 h-10 bg-sage rounded-full"></div>
                 </div>
-                <h3 className="text-xl font-medium mb-4">Your Pace</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-2xl font-medium mb-4">Your Pace</h3>
+                <p className="text-lg text-muted-foreground">
                   Take time to process and respond. No pressure, just presence.
                 </p>
               </div>

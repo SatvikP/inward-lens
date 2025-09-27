@@ -146,8 +146,7 @@ export class TextToSpeech {
           voice.name.toLowerCase().includes('allison') ||
           voice.name.toLowerCase().includes('ava') ||
           voice.name.toLowerCase().includes('serena') ||
-          (voice.name.toLowerCase().includes('google') && voice.lang === 'en-US') ||
-          (voice.gender && voice.gender === 'female')
+          (voice.name.toLowerCase().includes('google') && voice.lang === 'en-US')
         ) || voices.find(voice => 
           voice.name.includes('Natural') || 
           voice.name.includes('Neural')
