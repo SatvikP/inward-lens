@@ -78,7 +78,7 @@ const Avatar = () => {
             <div>
               <h1 className="text-xl font-light text-sage">Video Avatar</h1>
               <p className="text-sm text-muted-foreground">
-                {isConnected ? "Connected - Speak naturally" : "Real-time conversation with your aspirational self"}
+                Real-time conversation with your aspirational self
               </p>
             </div>
           </div>
