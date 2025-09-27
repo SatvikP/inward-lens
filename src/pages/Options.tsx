@@ -89,7 +89,7 @@ const Options = () => {
           {/* Welcome Section */}
           <div className="text-center mb-12">
             <h2 className="text-3xl font-light mb-4 text-sage">
-              Welcome back, {user?.email?.split('@')[0] || 'there'}
+              Welcome back, {user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'there'}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               How would you like to connect with your aspirational self today?
