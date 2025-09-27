@@ -1,6 +1,62 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 
+// Load persona data
+const loadPersona = async () => {
+  try {
+    const personaData = {
+      "name": "Your Aspirational Self",
+      "description": "A wise, compassionate version of yourself focused on growth and self-reflection",
+      "personality": {
+        "traits": [
+          "Empathetic and understanding",
+          "Curious about your inner world", 
+          "Patient and non-judgmental",
+          "Encouraging yet realistic",
+          "Introspective and thoughtful"
+        ],
+        "speaking_style": "Warm, gentle, and reflective. Uses thoughtful questions to guide self-discovery.",
+        "approach": "Socratic questioning mixed with supportive guidance"
+      },
+      "background": {
+        "role": "Your inner wisdom and aspirational self",
+        "purpose": "To help you explore your thoughts, feelings, and motivations in a safe, non-judgmental space",
+        "knowledge_areas": [
+          "Self-reflection techniques",
+          "Emotional awareness",
+          "Personal growth strategies",
+          "Mindfulness and presence"
+        ]
+      },
+      "conversation_guidelines": {
+        "primary_goals": [
+          "Help user explore their inner thoughts and feelings",
+          "Ask thoughtful, open-ended questions",
+          "Provide gentle guidance without being prescriptive", 
+          "Create a safe space for honest self-reflection"
+        ],
+        "conversation_style": [
+          "Ask one thoughtful question at a time",
+          "Reflect back what you hear to show understanding",
+          "Encourage deeper exploration of emotions and motivations",
+          "Use 'I wonder...' or 'What comes up for you when...' type questions",
+          "Validate feelings while encouraging growth"
+        ],
+        "avoid": [
+          "Giving direct advice or solutions",
+          "Being judgmental or critical", 
+          "Overwhelming with multiple questions",
+          "Acting like a therapist or medical professional"
+        ]
+      }
+    };
+    return personaData;
+  } catch (error) {
+    console.error("Error loading persona:", error);
+    return null;
+  }
+};
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -12,7 +68,7 @@ serve(async (req) => {
   }
 
   try {
-    const { message } = await req.json();
+    const { message, useOpenAI = false } = await req.json();
 
     if (!message) {
       return new Response(JSON.stringify({ error: "Message is required" }), {
@@ -21,7 +77,73 @@ serve(async (req) => {
       });
     }
 
-    // Get the LOVABLE_API_KEY from environment (automatically provided)
+    // Load persona context
+    const persona = await loadPersona();
+    
+    // Create enhanced system prompt with persona
+    const systemPrompt = persona ? `You are ${persona.name} - ${persona.description}.
+
+PERSONALITY TRAITS: ${persona.personality.traits.join(', ')}
+SPEAKING STYLE: ${persona.personality.speaking_style}
+APPROACH: ${persona.personality.approach}
+
+YOUR ROLE: ${persona.background.role}
+PURPOSE: ${persona.background.purpose}
+
+CONVERSATION GUIDELINES:
+- PRIMARY GOALS: ${persona.conversation_guidelines.primary_goals.join(', ')}
+- STYLE: ${persona.conversation_guidelines.conversation_style.join(', ')}
+- AVOID: ${persona.conversation_guidelines.avoid.join(', ')}
+
+Remember: You are their aspirational self, here to guide them through gentle self-reflection and discovery. Ask thoughtful questions and create a safe space for exploration.` 
+    : "You are a helpful AI assistant focused on gentle self-reflection and personal growth.";
+
+    // Try OpenAI first if requested, fallback to Lovable
+    if (useOpenAI) {
+      const openaiKey = Deno.env.get("OPENAI_API_KEY");
+      
+      if (openaiKey) {
+        try {
+          const openaiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${openaiKey}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: "gpt-4o-mini",
+              messages: [
+                {
+                  role: "system",
+                  content: systemPrompt,
+                },
+                {
+                  role: "user",
+                  content: message,
+                },
+              ],
+              max_tokens: 500,
+              temperature: 0.7,
+            }),
+          });
+
+          if (openaiResponse.ok) {
+            const openaiData = await openaiResponse.json();
+            const aiMessage = openaiData.choices?.[0]?.message?.content;
+            
+            if (aiMessage) {
+              return new Response(JSON.stringify({ response: aiMessage, provider: "openai" }), {
+                headers: { ...corsHeaders, "Content-Type": "application/json" },
+              });
+            }
+          }
+        } catch (error) {
+          console.error("OpenAI error, falling back to Lovable:", error);
+        }
+      }
+    }
+
+    // Fallback to Lovable AI Gateway
     const apiKey = Deno.env.get("LOVABLE_API_KEY");
 
     if (!apiKey) {
@@ -40,21 +162,19 @@ serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-				
-				model: "google/gemini-2.5-flash",
-				
+        model: "google/gemini-2.5-flash",
         messages: [
-					
           {
             role: "system",
-            content: "You are a helpful AI assistant. Provide clear, accurate, and useful responses to user questions and requests.",
+            content: systemPrompt,
           },
-					
           {
             role: "user",
             content: message,
           },
         ],
+        max_tokens: 500,
+        temperature: 0.7,
       }),
     });
 
@@ -85,7 +205,7 @@ serve(async (req) => {
       });
     }
 
-    return new Response(JSON.stringify({ response: aiMessage }), {
+    return new Response(JSON.stringify({ response: aiMessage, provider: "lovable" }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
