@@ -153,11 +153,11 @@ const Avatar = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate("/options")}
+              onClick={() => navigate("/")}
               className="text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Options
+              Back to Home
             </Button>
             <div>
               <h1 className="text-xl font-light text-sage">Video Avatar</h1>

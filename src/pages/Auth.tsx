@@ -20,7 +20,7 @@ const Auth = () => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        navigate("/options");
+        navigate("/");
       }
     };
     checkUser();
@@ -28,7 +28,7 @@ const Auth = () => {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session) {
-        navigate("/options");
+        navigate("/");
       }
     });
 
@@ -56,7 +56,7 @@ const Auth = () => {
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/options`
+            emailRedirectTo: `${window.location.origin}/`
           }
         });
         if (error) throw error;
@@ -83,7 +83,7 @@ const Auth = () => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/options`
+          redirectTo: `${window.location.origin}/`
         }
       });
       if (error) throw error;

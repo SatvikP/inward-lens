@@ -7,7 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { SpeechRecognition, TextToSpeech } from "@/lib/speechService";
-import { Mic, MicOff, Volume2, VolumeX } from "lucide-react";
+import { Mic, MicOff, Volume2, VolumeX, ArrowLeft } from "lucide-react";
 
 interface Message {
   id: string;
@@ -184,11 +184,22 @@ const Chat = () => {
       {/* Header */}
       <header className="bg-background/90 backdrop-blur-sm border-b border-border px-6 py-4">
         <div className="max-w-4xl mx-auto flex justify-between items-center">
-          <div>
-            <h1 className="text-xl font-light text-sage">Look Inwards</h1>
-            <p className="text-sm text-muted-foreground">
-              Conversing with Your Aspirational Self
-            </p>
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate("/")}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Home
+            </Button>
+            <div>
+              <h1 className="text-xl font-light text-sage">Text & Voice Chat</h1>
+              <p className="text-sm text-muted-foreground">
+                Conversing with Your Aspirational Self
+              </p>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <Button 
