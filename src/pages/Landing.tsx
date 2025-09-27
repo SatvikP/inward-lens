@@ -6,7 +6,6 @@ import { User } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MessageCircle, Video } from "lucide-react";
-
 const Landing = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
@@ -15,75 +14,65 @@ const Landing = () => {
   // Check authentication and show appropriate content
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: {
+          session
+        }
+      } = await supabase.auth.getSession();
       setUser(session?.user || null);
       setLoading(false);
     };
-
     checkAuth();
 
     // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const {
+      data: {
+        subscription
+      }
+    } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user || null);
       setLoading(false);
     });
-
     return () => subscription.unsubscribe();
   }, []);
-
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-warm-white to-sage-light">
+  return <div className="min-h-screen bg-gradient-to-br from-warm-white to-sage-light">
       {/* Header */}
       <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="text-xl font-light text-sage">Look Inwards</div>
           <div className="flex gap-4">
-            {user ? (
-              <>
+            {user ? <>
                 <span className="text-sm text-muted-foreground self-center">
                   Welcome back, {user.user_metadata?.full_name || user.email?.split('@')[0]}
                 </span>
                 <Button variant="ghost" onClick={handleSignOut}>
                   Sign Out
                 </Button>
-              </>
-            ) : (
-              <>
-                <HeroButton
-                  variant="ghost"
-                  onClick={() => navigate("/auth")}
-                >
+              </> : <>
+                <HeroButton variant="ghost" onClick={() => navigate("/auth")}>
                   Sign In
                 </HeroButton>
-                <HeroButton
-                  variant="outline"
-                  onClick={() => navigate("/auth")}
-                >
+                <HeroButton variant="outline" onClick={() => navigate("/auth")}>
                   Get Started
                 </HeroButton>
-              </>
-            )}
+              </>}
           </div>
         </div>
       </header>
 
       {/* Main Content */}
       <main className="pt-20">
-        {loading ? (
-          <div className="min-h-screen flex items-center justify-center">
+        {loading ? <div className="min-h-screen flex items-center justify-center">
             <div className="text-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sage mx-auto mb-4"></div>
               <p className="text-muted-foreground">Loading...</p>
             </div>
-          </div>
-        ) : user ? (
-          /* Logged-in User: Show Conversation Options */
-          <section className="container mx-auto px-6 py-20">
+          </div> : user ? (/* Logged-in User: Show Conversation Options */
+      <section className="container mx-auto px-6 py-20">
             <div className="max-w-4xl mx-auto">
               {/* Welcome Section */}
               <div className="text-center mb-12">
@@ -98,8 +87,7 @@ const Landing = () => {
               {/* Conversation Options */}
               <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 {/* Text Chat Option */}
-                <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-2 hover:border-sage/20"
-                      onClick={() => navigate("/chat")}>
+                <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-2 hover:border-sage/20" onClick={() => navigate("/chat")}>
                   <CardHeader className="text-center pb-4">
                     <div className="w-16 h-16 bg-sage/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-sage/20 transition-colors">
                       <MessageCircle className="h-8 w-8 text-sage" />
@@ -131,8 +119,7 @@ const Landing = () => {
                 </Card>
 
                 {/* Video Avatar Option */}
-                <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-2 hover:border-sage/20"
-                      onClick={() => navigate("/avatar")}>
+                <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-2 hover:border-sage/20" onClick={() => navigate("/avatar")}>
                   <CardHeader className="text-center pb-4">
                     <div className="w-16 h-16 bg-sage/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-sage/20 transition-colors">
                       <Video className="h-8 w-8 text-sage" />
@@ -171,37 +158,24 @@ const Landing = () => {
                 </p>
               </div>
             </div>
-          </section>
-        ) : (
-          /* Not Logged In: Show Landing Content */
-          <section className="container mx-auto px-6 py-20 text-center">
+          </section>) : (/* Not Logged In: Show Landing Content */
+      <section className="container mx-auto px-6 py-20 text-center">
             <div className="max-w-5xl mx-auto animate-fade-in">
               <h1 className="text-hero mb-8">
                 Look Inwards
               </h1>
-              <p className="text-subtitle mb-12 max-w-3xl mx-auto animate-slide-up">
-                talk to your shades and navigate life.
-              </p>
+              <p className="text-subtitle mb-12 max-w-3xl mx-auto animate-slide-up">talk to different versions of you and navigate life.</p>
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-slide-up">
-                <HeroButton
-                  variant="primary"
-                  onClick={() => navigate("/auth")}
-                  className="text-lg"
-                >
+                <HeroButton variant="primary" onClick={() => navigate("/auth")} className="text-lg">
                   Start Your Journey
                 </HeroButton>
-                <HeroButton
-                  variant="ghost"
-                  onClick={() => navigate("/auth")}
-                  className="text-lg"
-                >
+                <HeroButton variant="ghost" onClick={() => navigate("/auth")} className="text-lg">
                   Learn More
                 </HeroButton>
               </div>
             </div>
-          </section>
-        )}
+          </section>)}
 
         {/* Features Section */}
         <section className="container mx-auto px-6 py-20">
@@ -217,7 +191,9 @@ const Landing = () => {
                 </p>
               </div>
               
-              <div className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
+              <div className="animate-slide-up" style={{
+              animationDelay: "0.2s"
+            }}>
                 <div className="w-16 h-16 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6">
                   <div className="w-8 h-8 bg-sage rounded-full"></div>
                 </div>
@@ -227,7 +203,9 @@ const Landing = () => {
                 </p>
               </div>
               
-              <div className="animate-slide-up" style={{ animationDelay: "0.4s" }}>
+              <div className="animate-slide-up" style={{
+              animationDelay: "0.4s"
+            }}>
                 <div className="w-16 h-16 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6">
                   <div className="w-8 h-8 bg-sage rounded-full"></div>
                 </div>
@@ -247,8 +225,6 @@ const Landing = () => {
           <p>&copy; 2024 Look Inwards. A space for gentle self-discovery.</p>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Landing;
