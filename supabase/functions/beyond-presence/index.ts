@@ -4,6 +4,7 @@ import "https://deno.land/x/xhr@0.1.0/mod.ts";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, GET, OPTIONS, PUT, DELETE",
 };
 
 // Load persona data for avatar
@@ -53,12 +54,39 @@ const loadPersona = async () => {
 };
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
+    return new Response(null, { 
+      status: 200,
+      headers: corsHeaders 
+    });
   }
 
   try {
-    const { action, persona, sessionId } = await req.json();
+    // Ensure we can parse the request body
+    let requestBody;
+    try {
+      requestBody = await req.json();
+    } catch (parseError) {
+      console.error("Error parsing request body:", parseError);
+      return new Response(JSON.stringify({ error: "Invalid JSON in request body" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const { action, persona, sessionId } = requestBody;
+
+    // Health check endpoint
+    if (action === "health") {
+      return new Response(JSON.stringify({ 
+        status: "healthy",
+        timestamp: new Date().toISOString()
+      }), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     if (!action) {
       return new Response(JSON.stringify({ error: "Action is required" }), {
