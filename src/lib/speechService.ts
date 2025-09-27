@@ -62,6 +62,18 @@ export class TextToSpeech {
       const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
       this.audioContext = new AudioContext();
     }
+    
+    // Load voices when available
+    if ('speechSynthesis' in window) {
+      const loadVoices = () => {
+        speechSynthesis.getVoices();
+      };
+      
+      if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+      }
+      loadVoices();
+    }
   }
 
   async speak(text: string, useOpenAI = false): Promise<void> {
@@ -118,20 +130,31 @@ export class TextToSpeech {
     return new Promise((resolve, reject) => {
       if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.9;
-        utterance.pitch = 1;
+        utterance.rate = 0.85;
+        utterance.pitch = 1.1;
         utterance.volume = 0.8;
         
-        // Try to find a natural voice
+        // Try to find a female voice
         const voices = speechSynthesis.getVoices();
-        const preferredVoice = voices.find(voice => 
+        const femaleVoice = voices.find(voice => 
+          voice.name.toLowerCase().includes('female') ||
+          voice.name.toLowerCase().includes('woman') ||
+          voice.name.toLowerCase().includes('samantha') ||
+          voice.name.toLowerCase().includes('karen') ||
+          voice.name.toLowerCase().includes('susan') ||
+          voice.name.toLowerCase().includes('victoria') ||
+          voice.name.toLowerCase().includes('allison') ||
+          voice.name.toLowerCase().includes('ava') ||
+          voice.name.toLowerCase().includes('serena') ||
+          (voice.name.toLowerCase().includes('google') && voice.lang === 'en-US') ||
+          (voice.gender && voice.gender === 'female')
+        ) || voices.find(voice => 
           voice.name.includes('Natural') || 
-          voice.name.includes('Neural') || 
-          voice.default
+          voice.name.includes('Neural')
         );
         
-        if (preferredVoice) {
-          utterance.voice = preferredVoice;
+        if (femaleVoice) {
+          utterance.voice = femaleVoice;
         }
 
         this.isPlaying = true;

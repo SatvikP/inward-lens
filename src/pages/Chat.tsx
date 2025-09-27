@@ -30,8 +30,8 @@ const Chat = () => {
   const speechRecognition = useRef<SpeechRecognition | null>(null);
   const textToSpeech = useRef<TextToSpeech | null>(null);
 
+  // Authentication and initial setup - runs once
   useEffect(() => {
-    // Check authentication
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
@@ -40,7 +40,7 @@ const Chat = () => {
       }
       setUser(session.user);
 
-      // Add welcome message
+      // Add welcome message only once
       const welcomeMessage = {
         id: "welcome",
         role: "assistant" as const,
@@ -48,18 +48,24 @@ const Chat = () => {
         timestamp: new Date()
       };
       setMessages([welcomeMessage]);
-      
-      // Speak welcome message if speech is enabled
-      if (speechEnabled && textToSpeech.current) {
-        setTimeout(() => {
-          textToSpeech.current?.speak(welcomeMessage.content);
-        }, 1000);
-      }
     };
 
     checkAuth();
 
-    // Initialize speech services
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!session) {
+        navigate("/auth");
+      } else {
+        setUser(session.user);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
+
+  // Initialize speech services - runs once
+  useEffect(() => {
     textToSpeech.current = new TextToSpeech();
     speechRecognition.current = new SpeechRecognition(
       (transcript) => {
@@ -75,18 +81,7 @@ const Chat = () => {
         setIsListening(false);
       }
     );
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (!session) {
-        navigate("/auth");
-      } else {
-        setUser(session.user);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate, speechEnabled, toast]);
+  }, [toast]);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();

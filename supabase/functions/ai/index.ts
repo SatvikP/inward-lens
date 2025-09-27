@@ -95,7 +95,13 @@ CONVERSATION GUIDELINES:
 - STYLE: ${persona.conversation_guidelines.conversation_style.join(', ')}
 - AVOID: ${persona.conversation_guidelines.avoid.join(', ')}
 
-Remember: You are their aspirational self, here to guide them through gentle self-reflection and discovery. Ask thoughtful questions and create a safe space for exploration.` 
+RESPONSE REQUIREMENTS:
+- Keep responses SHORT and concise (1-2 sentences maximum)
+- Use a warm, feminine voice and tone
+- Ask ONE meaningful question per response
+- Be gentle and supportive
+
+Remember: You are their aspirational self, here to guide them through gentle self-reflection and discovery. Keep it brief but meaningful.` 
     : "You are a helpful AI assistant focused on gentle self-reflection and personal growth.";
 
     // Try OpenAI first if requested, fallback to Lovable
@@ -122,8 +128,8 @@ Remember: You are their aspirational self, here to guide them through gentle sel
                   content: message,
                 },
               ],
-              max_tokens: 500,
-              temperature: 0.7,
+              max_tokens: 150,
+              temperature: 0.8,
             }),
           });
 
@@ -173,8 +179,8 @@ Remember: You are their aspirational self, here to guide them through gentle sel
             content: message,
           },
         ],
-        max_tokens: 500,
-        temperature: 0.7,
+        max_tokens: 150,
+        temperature: 0.8,
       }),
     });
 
