@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
@@ -11,7 +11,32 @@ const Avatar = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const navigate = useNavigate();
+  const { agentType } = useParams<{ agentType: string }>();
   const { toast } = useToast();
+
+  // Agent configurations
+  const agentConfigs = {
+    calm: {
+      title: "Calm & Composed",
+      description: "Your serene, balanced self focused on mindfulness and peace",
+      embedUrl: "https://bey.chat/439d931d-0c5d-4fef-93c9-0d24e700e9be",
+      color: "blue"
+    },
+    driven: {
+      title: "Driven & Disciplined",
+      description: "Your ambitious, goal-oriented self pushing toward excellence",
+      embedUrl: "https://bey.chat/64b21217-e5f3-4ad7-a3b8-6c78598ab120",
+      color: "orange"
+    },
+    confident: {
+      title: "Confident & Charismatic",
+      description: "Your bold, inspiring self building confidence and leadership",
+      embedUrl: "https://bey.chat/36103f7c-7d11-4439-adfd-e852b2bda4b8",
+      color: "purple"
+    }
+  };
+
+  const currentAgent = agentConfigs[agentType as keyof typeof agentConfigs] || agentConfigs.calm;
 
   useEffect(() => {
     // Check authentication
@@ -76,9 +101,9 @@ const Avatar = () => {
               Back to Home
             </Button>
             <div>
-              <h1 className="text-xl font-light text-sage">Video Avatar</h1>
+              <h1 className="text-xl font-light text-sage">{currentAgent.title}</h1>
               <p className="text-sm text-muted-foreground">
-                Real-time conversation with your aspirational self
+                {currentAgent.description}
               </p>
             </div>
           </div>
@@ -98,14 +123,14 @@ const Avatar = () => {
               
               {/* Beyond Presence Avatar Iframe */}
               <iframe 
-                src="https://bey.chat/b40e3d7e-3574-4f82-9bb6-90cf488b2029" 
+                src={currentAgent.embedUrl} 
                 width="100%" 
                 height="100%"
                 frameBorder="0" 
                 allowFullScreen
                 allow="camera; microphone; fullscreen"
                 className="w-full h-full border-none"
-                title="Your Aspirational Self Avatar"
+                title={`${currentAgent.title} Avatar`}
               />
 
               {/* Fullscreen Toggle */}

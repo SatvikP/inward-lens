@@ -77,75 +77,107 @@ const Landing = () => {
               {/* Welcome Section */}
               <div className="text-center mb-12">
                 <h1 className="text-hero mb-8">
-                  Ready to Connect?
+                  Choose Your Avatar
                 </h1>
                 <p className="text-subtitle mb-12 max-w-3xl mx-auto">
-                  Choose how you'd like to engage with your aspirational self today.
+                  Select which version of yourself you'd like to connect with today.
                 </p>
               </div>
 
-              {/* Conversation Options */}
-              <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                {/* Text Chat Option */}
-                <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-2 hover:border-sage/20" onClick={() => navigate("/chat")}>
+              {/* Avatar Options */}
+              <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                {/* Calm & Composed Avatar */}
+                <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-2 hover:border-sage/20" onClick={() => navigate("/avatar/calm")}>
                   <CardHeader className="text-center pb-4">
-                    <div className="w-16 h-16 bg-sage/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-sage/20 transition-colors">
-                      <MessageCircle className="h-8 w-8 text-sage" />
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
+                      <Video className="h-8 w-8 text-blue-600" />
                     </div>
-                    <CardTitle className="text-xl font-medium">Chat with Text & Voice</CardTitle>
+                    <CardTitle className="text-xl font-medium">Calm & Composed</CardTitle>
                     <CardDescription className="text-base">
-                      Type or speak your thoughts and receive thoughtful written responses with optional voice playback
+                      Talk to your serene, balanced self - focused on mindfulness, peace, and steady growth
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="text-center">
                     <div className="space-y-2 mb-6">
                       <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        Text conversation
+                        Mindful guidance
                       </div>
                       <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        Speech recognition
+                        Stress reduction focus
                       </div>
                       <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        Text-to-speech responses
+                        Real-time video chat
                       </div>
                     </div>
-                    <Button className="w-full group-hover:bg-sage group-hover:text-white transition-colors">
-                      Start Text Chat
+                    <Button className="w-full group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                      Talk to Calm You
                     </Button>
                   </CardContent>
                 </Card>
 
-                {/* Video Avatar Option */}
-                <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-2 hover:border-sage/20" onClick={() => navigate("/avatar")}>
+                {/* Driven & Disciplined Avatar */}
+                <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-2 hover:border-sage/20" onClick={() => navigate("/avatar/driven")}>
                   <CardHeader className="text-center pb-4">
-                    <div className="w-16 h-16 bg-sage/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-sage/20 transition-colors">
-                      <Video className="h-8 w-8 text-sage" />
+                    <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-200 transition-colors">
+                      <Video className="h-8 w-8 text-orange-600" />
                     </div>
-                    <CardTitle className="text-xl font-medium">Talk in Video</CardTitle>
+                    <CardTitle className="text-xl font-medium">Driven & Disciplined</CardTitle>
                     <CardDescription className="text-base">
-                      Have a face-to-face conversation with your AI avatar companion using real-time video
+                      Connect with your ambitious, goal-oriented self - pushing you toward excellence and achievement
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="text-center">
                     <div className="space-y-2 mb-6">
                       <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        Real-time video avatar
+                        Goal-oriented coaching
                       </div>
                       <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        Voice-only interaction
+                        Performance optimization
                       </div>
                       <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                        <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
-                        Experimental feature
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        Real-time video chat
                       </div>
                     </div>
-                    <Button className="w-full group-hover:bg-sage group-hover:text-white transition-colors">
-                      Talk in Video
+                    <Button className="w-full group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                      Talk to Driven You
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Confident & Charismatic Avatar */}
+                <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-2 hover:border-sage/20" onClick={() => navigate("/avatar/confident")}>
+                  <CardHeader className="text-center pb-4">
+                    <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 transition-colors">
+                      <Video className="h-8 w-8 text-purple-600" />
+                    </div>
+                    <CardTitle className="text-xl font-medium">Confident & Charismatic</CardTitle>
+                    <CardDescription className="text-base">
+                      Speak with your bold, inspiring self - building confidence, social skills, and leadership
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-center">
+                    <div className="space-y-2 mb-6">
+                      <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        Confidence building
+                      </div>
+                      <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        Social skills enhancement
+                      </div>
+                      <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        Real-time video chat
+                      </div>
+                    </div>
+                    <Button className="w-full group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                      Talk to Confident You
                     </Button>
                   </CardContent>
                 </Card>
@@ -154,7 +186,7 @@ const Landing = () => {
               {/* Additional Info */}
               <div className="text-center mt-12">
                 <p className="text-sm text-muted-foreground">
-                  Both options connect you with the same aspirational self, just through different mediums
+                  Each avatar represents a different aspect of your aspirational self - choose the one that resonates with your current needs
                 </p>
               </div>
             </div>

@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
 import Options from "./pages/Options";
-import Chat from "./pages/Chat";
 import Avatar from "./pages/Avatar";
 import NotFound from "./pages/NotFound";
 
@@ -22,8 +21,7 @@ const App = () => (
           <Route path="/" element={<Landing />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/options" element={<Options />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/avatar" element={<Avatar />} />
+          <Route path="/avatar/:agentType" element={<Avatar />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
