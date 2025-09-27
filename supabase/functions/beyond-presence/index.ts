@@ -282,7 +282,16 @@ Remember: You are speaking on video, so be natural and conversational. This is a
 
   } catch (error) {
     console.error("Error in Beyond Presence function:", error);
-    return new Response(JSON.stringify({ error: "Internal server error" }), {
+    console.error("Error details:", {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
+    return new Response(JSON.stringify({ 
+      error: "Internal server error",
+      details: error.message,
+      timestamp: new Date().toISOString()
+    }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
