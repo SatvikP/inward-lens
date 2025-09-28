@@ -33,12 +33,17 @@ const Landing = () => {
         <section className="container mx-auto px-6 py-12">
           <div className="max-w-4xl mx-auto">
             {/* Eleven Labs Voice Agent - Centered above avatar selection */}
-            <div className="text-center mb-16">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: '<elevenlabs-convai agent-id="agent_3301k67tntwzf7ca0kbqr4nkncj5"></elevenlabs-convai>'
-                }}
-              />
+            <div className="text-center mb-16 bg-gray-100 p-8 rounded-lg">
+              <h3 className="text-lg font-medium mb-4 text-gray-700">Start a Voice Conversation</h3>
+              <div className="flex justify-center items-center min-h-[100px]">
+                <div
+                  style={{ position: 'relative', zIndex: 10 }}
+                  dangerouslySetInnerHTML={{
+                    __html: '<elevenlabs-convai agent-id="agent_3301k67tntwzf7ca0kbqr4nkncj5"></elevenlabs-convai>'
+                  }}
+                />
+              </div>
+              <p className="text-sm text-gray-600 mt-4">Click the button above to start talking with your AI assistant</p>
             </div>
 
             {/* Avatar Selection Header */}
