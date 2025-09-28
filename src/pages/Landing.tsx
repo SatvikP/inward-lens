@@ -17,15 +17,27 @@ const Landing = () => {
 
       {/* Main Content */}
       <main className="pt-20">
+        {/* Welcome Section */}
+        <section className="container mx-auto px-6 py-12">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-hero mb-6">
+              Look Inwards
+            </h1>
+            <p className="text-subtitle mb-8 max-w-3xl mx-auto">
+              Talk to different versions of yourself and navigate life through thoughtful conversations.
+            </p>
+          </div>
+        </section>
+
         {/* Avatar Selection Section */}
-        <section className="container mx-auto px-6 py-20">
+        <section className="container mx-auto px-6 py-8">
           <div className="max-w-4xl mx-auto">
-            {/* Welcome Section */}
-            <div className="text-center mb-12">
-              <h1 className="text-hero mb-8">
+            {/* Avatar Selection Header */}
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-light mb-4 text-sage">
                 Choose Your Avatar
-              </h1>
-              <p className="text-subtitle mb-12 max-w-3xl mx-auto">
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Select which version of yourself you'd like to connect with today.
               </p>
             </div>
@@ -134,53 +146,6 @@ const Landing = () => {
               <p className="text-sm text-muted-foreground">
                 Each avatar represents a different aspect of your aspirational self - choose the one that resonates with your current needs
               </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section className="container mx-auto px-6 py-12">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div className="animate-slide-up">
-                <div className="relative w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-                  <div className="absolute inset-0 bg-sage-light rounded-full animate-ping opacity-20"></div>
-                  <div className="absolute inset-2 bg-sage-light rounded-full animate-ping opacity-40" style={{ animationDelay: "0.5s" }}></div>
-                  <div className="relative w-10 h-10 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-2xl font-medium mb-4">Gentle Guidance</h3>
-                <p className="text-lg text-muted-foreground">
-                  Your avatar asks thoughtful questions to help you discover your own answers.
-                </p>
-              </div>
-              
-              <div className="animate-slide-up" style={{
-              animationDelay: "0.2s"
-            }}>
-                <div className="relative w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-                  <div className="absolute inset-0 bg-sage-light rounded-full animate-ping opacity-20"></div>
-                  <div className="absolute inset-2 bg-sage-light rounded-full animate-ping opacity-40" style={{ animationDelay: "0.5s" }}></div>
-                  <div className="relative w-10 h-10 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-2xl font-medium mb-4">Safe Space</h3>
-                <p className="text-lg text-muted-foreground">
-                  A private, judgment-free environment for honest self-reflection.
-                </p>
-              </div>
-              
-              <div className="animate-slide-up" style={{
-              animationDelay: "0.4s"
-            }}>
-                <div className="relative w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-                  <div className="absolute inset-0 bg-sage-light rounded-full animate-ping opacity-20"></div>
-                  <div className="absolute inset-2 bg-sage-light rounded-full animate-ping opacity-40" style={{ animationDelay: "0.5s" }}></div>
-                  <div className="relative w-10 h-10 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-2xl font-medium mb-4">Your Pace</h3>
-                <p className="text-lg text-muted-foreground">
-                  Take time to process and respond. No pressure, just presence.
-                </p>
-              </div>
             </div>
           </div>
         </section>
