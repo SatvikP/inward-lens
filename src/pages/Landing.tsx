@@ -54,8 +54,51 @@ const Landing = () => {
           </div>
         </section>
 
+        {/* Features Section */}
+        <section className="container mx-auto px-6 py-12 bg-gray-50">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-8">
+              <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
+                Each avatar represents a different aspect of your aspirational self - choose the one that resonates with your current needs
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 text-center">
+              <div>
+                <div className="w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-10 h-10 bg-sage rounded-full"></div>
+                </div>
+                <h3 className="text-2xl font-medium mb-4">Gentle Guidance</h3>
+                <p className="text-lg text-muted-foreground">
+                  Your avatar asks thoughtful questions to help you discover your own answers.
+                </p>
+              </div>
+              
+              <div>
+                <div className="w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-10 h-10 bg-sage rounded-full"></div>
+                </div>
+                <h3 className="text-2xl font-medium mb-4">Safe Space</h3>
+                <p className="text-lg text-muted-foreground">
+                  A private, judgment-free environment for honest self-reflection.
+                </p>
+              </div>
+              
+              <div>
+                <div className="w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-10 h-10 bg-sage rounded-full"></div>
+                </div>
+                <h3 className="text-2xl font-medium mb-4">Your Pace</h3>
+                <p className="text-lg text-muted-foreground">
+                  Take time to process and respond. No pressure, just presence.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Avatar Selection Section */}
-        <section className="container mx-auto px-6 py-8">
+        <section className="container mx-auto px-6 py-12">
           <div className="max-w-4xl mx-auto">
             {/* Avatar Selection Header */}
             <div className="text-center mb-12">
@@ -171,53 +214,6 @@ const Landing = () => {
               <p className="text-sm text-muted-foreground">
                 Each avatar represents a different aspect of your aspirational self - choose the one that resonates with your current needs
               </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section className="container mx-auto px-6 py-12">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div className="animate-slide-up">
-                <div className="relative w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-                  <div className="absolute inset-0 bg-sage-light rounded-full animate-ping opacity-20"></div>
-                  <div className="absolute inset-2 bg-sage-light rounded-full animate-ping opacity-40" style={{ animationDelay: "0.5s" }}></div>
-                  <div className="relative w-10 h-10 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-2xl font-medium mb-4">Gentle Guidance</h3>
-                <p className="text-lg text-muted-foreground">
-                  Your avatar asks thoughtful questions to help you discover your own answers.
-                </p>
-              </div>
-              
-              <div className="animate-slide-up" style={{
-              animationDelay: "0.2s"
-            }}>
-                <div className="relative w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-                  <div className="absolute inset-0 bg-sage-light rounded-full animate-ping opacity-20"></div>
-                  <div className="absolute inset-2 bg-sage-light rounded-full animate-ping opacity-40" style={{ animationDelay: "0.5s" }}></div>
-                  <div className="relative w-10 h-10 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-2xl font-medium mb-4">Safe Space</h3>
-                <p className="text-lg text-muted-foreground">
-                  A private, judgment-free environment for honest self-reflection.
-                </p>
-              </div>
-              
-              <div className="animate-slide-up" style={{
-              animationDelay: "0.4s"
-            }}>
-                <div className="relative w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-                  <div className="absolute inset-0 bg-sage-light rounded-full animate-ping opacity-20"></div>
-                  <div className="absolute inset-2 bg-sage-light rounded-full animate-ping opacity-40" style={{ animationDelay: "0.5s" }}></div>
-                  <div className="relative w-10 h-10 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-2xl font-medium mb-4">Your Pace</h3>
-                <p className="text-lg text-muted-foreground">
-                  Take time to process and respond. No pressure, just presence.
-                </p>
-              </div>
             </div>
           </div>
         </section>
