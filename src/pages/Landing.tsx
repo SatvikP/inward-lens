@@ -18,19 +18,44 @@ const Landing = () => {
       {/* Main Content */}
       <main className="pt-20">
         {/* Welcome Section */}
-        <section className="container mx-auto px-6 py-20">
+        <section className="container mx-auto px-6 py-16">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-hero mb-8">
               Look Inwards
             </h1>
-            <p className="text-subtitle mb-12 max-w-3xl mx-auto">
+            <p className="text-subtitle mb-16 max-w-3xl mx-auto">
               Talk to different versions of yourself and navigate life through thoughtful conversations.
             </p>
+            
+            {/* Quick intro cards */}
+            <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-4xl mx-auto">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <div className="w-6 h-6 bg-sage rounded-full"></div>
+                </div>
+                <h3 className="text-lg font-medium mb-2">Personalized</h3>
+                <p className="text-sm text-muted-foreground">Each avatar reflects different aspects of your personality</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <div className="w-6 h-6 bg-sage rounded-full"></div>
+                </div>
+                <h3 className="text-lg font-medium mb-2">Private</h3>
+                <p className="text-sm text-muted-foreground">Your conversations are completely confidential</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <div className="w-6 h-6 bg-sage rounded-full"></div>
+                </div>
+                <h3 className="text-lg font-medium mb-2">Insightful</h3>
+                <p className="text-sm text-muted-foreground">Gain new perspectives through meaningful dialogue</p>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Avatar Selection Section */}
-        <section className="container mx-auto px-6 py-12">
+        <section className="container mx-auto px-6 py-8">
           <div className="max-w-4xl mx-auto">
             {/* Avatar Selection Header */}
             <div className="text-center mb-12">
