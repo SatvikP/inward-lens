@@ -17,30 +17,30 @@ const Landing = () => {
 
       {/* Main Content */}
       <main className="pt-20">
-        {/* Voice Agent Section */}
+        {/* Welcome Section */}
         <section className="container mx-auto px-6 py-20">
-          <div className="max-w-4xl mx-auto text-center mb-16">
+          <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-hero mb-8">
               Look Inwards
             </h1>
             <p className="text-subtitle mb-12 max-w-3xl mx-auto">
               Start a conversation with your inner self using our AI voice agent, or choose from specific avatar personalities below.
             </p>
-
-            {/* Eleven Labs Voice Agent */}
-            <div className="mb-16">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: '<elevenlabs-convai agent-id="agent_3301k67tntwzf7ca0kbqr4nkncj5"></elevenlabs-convai>'
-                }}
-              />
-            </div>
           </div>
         </section>
 
         {/* Avatar Selection Section */}
         <section className="container mx-auto px-6 py-12">
           <div className="max-w-4xl mx-auto">
+            {/* Eleven Labs Voice Agent - Centered above avatar selection */}
+            <div className="text-center mb-16">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: '<elevenlabs-convai agent-id="agent_3301k67tntwzf7ca0kbqr4nkncj5"></elevenlabs-convai>'
+                }}
+              />
+            </div>
+
             {/* Avatar Selection Header */}
             <div className="text-center mb-12">
               <h2 className="text-3xl font-light mb-4 text-sage">
