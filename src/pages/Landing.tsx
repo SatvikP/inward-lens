@@ -11,9 +11,6 @@ const Landing = () => {
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="text-xl font-light text-sage">Look Inwards</div>
           <div className="flex gap-4">
-            <HeroButton variant="outline" onClick={() => navigate("/options")}>
-              Get Started
-            </HeroButton>
           </div>
         </div>
       </header>
