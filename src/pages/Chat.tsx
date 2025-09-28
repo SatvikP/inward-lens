@@ -4,8 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
 import { SpeechRecognition, TextToSpeech } from "@/lib/speechService";
 import { Mic, MicOff, Volume2, VolumeX, ArrowLeft } from "lucide-react";
 
@@ -17,7 +15,6 @@ interface Message {
 }
 
 const Chat = () => {
-  const [user, setUser] = useState<User | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [currentMessage, setCurrentMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,39 +27,17 @@ const Chat = () => {
   const speechRecognition = useRef<SpeechRecognition | null>(null);
   const textToSpeech = useRef<TextToSpeech | null>(null);
 
-  // Authentication and initial setup - runs once
+  // Initial setup - runs once
   useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        navigate("/auth");
-        return;
-      }
-      setUser(session.user);
-
-      // Add welcome message only once
-      const welcomeMessage = {
-        id: "welcome",
-        role: "assistant" as const,
-        content: "Hello. I'm your aspirational self - here to listen and help you explore what's on your mind. What would you like to reflect on today?",
-        timestamp: new Date()
-      };
-      setMessages([welcomeMessage]);
+    // Add welcome message only once
+    const welcomeMessage = {
+      id: "welcome",
+      role: "assistant" as const,
+      content: "Hello. I'm your aspirational self - here to listen and help you explore what's on your mind. What would you like to reflect on today?",
+      timestamp: new Date()
     };
-
-    checkAuth();
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (!session) {
-        navigate("/auth");
-      } else {
-        setUser(session.user);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate]);
+    setMessages([welcomeMessage]);
+  }, []);
 
   // Initialize speech services - runs once
   useEffect(() => {
@@ -83,13 +58,6 @@ const Chat = () => {
     );
   }, [toast]);
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Signed out",
-      description: "Take care of yourself.",
-    });
-  };
 
   const toggleListening = () => {
     if (isListening) {
@@ -125,20 +93,21 @@ const Chat = () => {
     setLoading(true);
 
     try {
-      // Call the AI function
-      const { data, error } = await supabase.functions.invoke('ai', {
-        body: { 
-          message: userMessage.content,
-          useOpenAI: true // Try OpenAI first
-        }
-      });
+      // Simulate AI response for demo
+      await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
 
-      if (error) throw error;
+      const responses = [
+        "That's an interesting perspective. What draws you to think about this now?",
+        "I hear what you're saying. How does this make you feel?",
+        "Thank you for sharing that with me. What would you like to explore further?",
+        "That sounds meaningful to you. Can you tell me more about why this matters?",
+        "I appreciate your openness. What do you think your next step might be?"
+      ];
 
       const avatarMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: data.response,
+        content: responses[Math.floor(Math.random() * responses.length)],
         timestamp: new Date()
       };
 
@@ -148,7 +117,7 @@ const Chat = () => {
       if (speechEnabled) {
         setIsSpeaking(true);
         try {
-          await textToSpeech.current?.speak(data.response);
+          await textToSpeech.current?.speak(avatarMessage.content);
         } catch (speechError) {
           console.error('Text-to-speech error:', speechError);
         } finally {
@@ -168,16 +137,6 @@ const Chat = () => {
     }
   };
 
-  if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sage mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-warm-white to-sage-light">
@@ -209,9 +168,6 @@ const Chat = () => {
               className={speechEnabled ? "text-sage" : "text-muted-foreground"}
             >
               {speechEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
-            </Button>
-            <Button variant="ghost" onClick={handleSignOut}>
-              Sign Out
             </Button>
           </div>
         </div>

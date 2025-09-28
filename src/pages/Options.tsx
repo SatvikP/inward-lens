@@ -1,61 +1,12 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
 import { MessageCircle, Video, ArrowLeft } from "lucide-react";
 
 const Options = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const { toast } = useToast();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        navigate("/auth");
-        return;
-      }
-      setUser(session.user);
-      setLoading(false);
-    };
 
-    checkAuth();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (!session) {
-        navigate("/auth");
-      } else {
-        setUser(session.user);
-        setLoading(false);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate]);
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Signed out",
-      description: "Take care of yourself.",
-    });
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sage mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-warm-white to-sage-light">
@@ -77,9 +28,6 @@ const Options = () => {
               <p className="text-sm text-muted-foreground">Choose your conversation style</p>
             </div>
           </div>
-          <Button variant="ghost" onClick={handleSignOut}>
-            Sign Out
-          </Button>
         </div>
       </header>
 
@@ -89,7 +37,7 @@ const Options = () => {
           {/* Welcome Section */}
           <div className="text-center mb-12">
             <h2 className="text-3xl font-light mb-4 text-sage">
-              Welcome back, {user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'there'}
+              Welcome
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               How would you like to connect with your aspirational self today?

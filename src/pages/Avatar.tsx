@@ -1,18 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
 import { ArrowLeft, Maximize2, Minimize2 } from "lucide-react";
 
 const Avatar = () => {
-  const [user, setUser] = useState<User | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const navigate = useNavigate();
   const { agentType } = useParams<{ agentType: string }>();
-  const { toast } = useToast();
 
   // Agent configurations
   const agentConfigs = {
@@ -38,52 +33,11 @@ const Avatar = () => {
 
   const currentAgent = agentConfigs[agentType as keyof typeof agentConfigs] || agentConfigs.calm;
 
-  useEffect(() => {
-    // Check authentication
-    const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        navigate("/auth");
-        return;
-      }
-      setUser(session.user);
-    };
-
-    checkAuth();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (!session) {
-        navigate("/auth");
-      } else {
-        setUser(session.user);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate]);
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Signed out",
-      description: "Take care of yourself.",
-    });
-  };
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
   };
 
-  if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sage mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-warm-white to-sage-light">
@@ -107,9 +61,6 @@ const Avatar = () => {
               </p>
             </div>
           </div>
-          <Button variant="ghost" onClick={handleSignOut}>
-            Sign Out
-          </Button>
         </div>
       </header>
 
