@@ -19,19 +19,19 @@ const Avatar = () => {
     calm: {
       title: "Calm & Composed",
       description: "Your serene, balanced self focused on mindfulness and peace",
-      embedUrl: "https://bey.chat/439d931d-0c5d-4fef-93c9-0d24e700e9be",
+      embedUrl: "https://bey.chat/b24063de-dfba-4079-9138-ed115de5f37e",
       color: "blue"
     },
     driven: {
       title: "Driven & Disciplined",
       description: "Your ambitious, goal-oriented self pushing toward excellence",
-      embedUrl: "https://bey.chat/64b21217-e5f3-4ad7-a3b8-6c78598ab120",
+      embedUrl: "https://bey.chat/1061dbe3-d1ce-4cd3-a890-85cc54c59e1d",
       color: "orange"
     },
     confident: {
       title: "Confident & Charismatic",
       description: "Your bold, inspiring self building confidence and leadership",
-      embedUrl: "https://bey.chat/36103f7c-7d11-4439-adfd-e852b2bda4b8",
+      embedUrl: "https://bey.chat/9080ce37-b46e-40cb-b6ef-39e71785bc71",
       color: "purple"
     }
   };
