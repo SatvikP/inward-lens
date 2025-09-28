@@ -18,90 +18,22 @@ const Landing = () => {
       {/* Main Content */}
       <main className="pt-20">
         {/* Welcome Section */}
-        <section className="container mx-auto px-6 py-16">
+        <section className="container mx-auto px-6 py-12">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-hero mb-8">
+            <h1 className="text-hero mb-6">
               Look Inwards
             </h1>
-            <p className="text-subtitle mb-16 max-w-3xl mx-auto">
+            <p className="text-subtitle mb-8 max-w-3xl mx-auto">
               Talk to different versions of yourself and navigate life through thoughtful conversations.
             </p>
-            
-            {/* Quick intro cards */}
-            <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <div className="w-6 h-6 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-lg font-medium mb-2">Personalized</h3>
-                <p className="text-sm text-muted-foreground">Each avatar reflects different aspects of your personality</p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <div className="w-6 h-6 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-lg font-medium mb-2">Private</h3>
-                <p className="text-sm text-muted-foreground">Your conversations are completely confidential</p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <div className="w-6 h-6 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-lg font-medium mb-2">Insightful</h3>
-                <p className="text-sm text-muted-foreground">Gain new perspectives through meaningful dialogue</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section className="container mx-auto px-6 py-12 bg-gray-50">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-8">
-              <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
-                Each avatar represents a different aspect of your aspirational self - choose the one that resonates with your current needs
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6">
-                  <div className="w-10 h-10 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-2xl font-medium mb-4">Gentle Guidance</h3>
-                <p className="text-lg text-muted-foreground">
-                  Your avatar asks thoughtful questions to help you discover your own answers.
-                </p>
-              </div>
-              
-              <div>
-                <div className="w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6">
-                  <div className="w-10 h-10 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-2xl font-medium mb-4">Safe Space</h3>
-                <p className="text-lg text-muted-foreground">
-                  A private, judgment-free environment for honest self-reflection.
-                </p>
-              </div>
-              
-              <div>
-                <div className="w-20 h-20 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-6">
-                  <div className="w-10 h-10 bg-sage rounded-full"></div>
-                </div>
-                <h3 className="text-2xl font-medium mb-4">Your Pace</h3>
-                <p className="text-lg text-muted-foreground">
-                  Take time to process and respond. No pressure, just presence.
-                </p>
-              </div>
-            </div>
           </div>
         </section>
 
         {/* Avatar Selection Section */}
-        <section className="container mx-auto px-6 py-12">
+        <section className="container mx-auto px-6 py-8">
           <div className="max-w-4xl mx-auto">
             {/* Avatar Selection Header */}
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-3xl font-light mb-4 text-sage">
                 Choose Your Avatar
               </h2>
